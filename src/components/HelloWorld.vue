@@ -79,7 +79,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/scss/main.scss';
+@import '@/scss/_variables.scss';
 .button-start {
   @include button-primary;
 }
