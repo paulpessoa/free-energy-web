@@ -1,13 +1,35 @@
-$font-family: 'Oxanium', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&family=Roboto:ital,wght@1,700&display=swap');
 
-$color-primary: red;
-$color-secondary: #000000;
-$color-tertiary: #ffffff;
+$font-family: 'Oxanium';
+
+$color-primary-dark: #06121E;
+$color-primary: #192A3D;
+
+$color-secondary: #ECA426;
+
+$color-tertiary-dark: #1DCFDE;
+$color-tertiary: #34F5C5;
+
+$color-quaternary: #1DCFDE;
+
+$color-primary-gradient: linear-gradient($color-primary-dark, $color-primary);
+$color-secondary-gradient: linear-gradient($color-tertiary-dark, $color-tertiary);
+
+$color-primary-light: #EDF3F4!important;
+$color-primary-dark: #06121E;
+$color-primary-light: #2F455C;
+
+$color-secondary-light: #F5E9C4;
 
 $font-primary: 1.5rem;
 $font-secondary: 1.2rem;
 $font-tertiary: 1rem;
 
-* {
-    font-family: $font-family;
+
+@mixin button-primary {
+    color: $color-primary-dark;
+    border-radius: 8px;
+    text-transform: none;
+    background: $color-secondary-gradient;
+    padding: 22px;
 }

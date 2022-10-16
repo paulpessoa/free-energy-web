@@ -1,20 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app elevation="0" class="">
       <div class="d-flex align-center">
-        <router-link to="/" class="d-flex align-center">
-          <v-img
-            alt="Vuetify Logo"
-            class="shrink mr-2"
-            contain
-            src="./assets/logo.png"
-            transition="scale-transition"
-            width="40"
-          />
+        <router-link to="/" style="text-decoration: none" class="d-flex align-center">
+          <v-img alt="Vuetify Logo" class="shrink mr-2" contain src="./assets/logo.png" transition="scale-transition"
+            width="40" />
           <h1 style="color: white"> Free Energy </h1>
         </router-link>
-
-        
       </div>
 
       <v-spacer></v-spacer>
@@ -29,9 +21,9 @@
         Configurações
       </v-btn>
     </v-app-bar>
-
     <v-main>
-      <router-view style="background: #2F455C"/>
+      <v-divider class="mx-8" color="#fff"></v-divider>
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -46,3 +38,25 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+@import '@/scss/main.scss';
+
+* {
+  color: #fff;
+  font-family: $font-family;
+}
+
+.v-app-bar {
+  background-color: $color-primary !important;
+
+  .v-btn {
+    color: $color-tertiary;
+    text-transform: none;
+  }
+}
+
+.v-main {
+  background-color: $color-primary;
+}
+</style>
