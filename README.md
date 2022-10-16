@@ -28,6 +28,11 @@ npm install
 npm run serve
 ```
 
+### Vue Drag and Drop
+```
+npm i -S vuedraggable
+```
+
 ### Geolocation Map Lib
 
 https://vue2-leaflet.netlify.app/
