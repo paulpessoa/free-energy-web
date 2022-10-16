@@ -31,7 +31,7 @@
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view style="background: #2F455C"/>
     </v-main>
   </v-app>
 </template>

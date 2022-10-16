@@ -4,13 +4,25 @@
             <v-col class="col-6">
                 <h3>Carrinho</h3>
                 <p>Total_ 152kWh | R$ 21,59</p>
-                <v-card>
-                    <h3>Cart 1</h3>
+                <v-card class="card-cart">                  
                     <draggable class="list-group" :list="list1" group="people" @change="log">
                         <transition-group>
+
                             <v-card class="list-group-item ma-4 pa-4" v-for="(element, index) in list1"
-                                :key="element.name">
-                                {{ element.name }} {{ index }}
+                                :key="element.company">
+                                Index:  {{ index }}
+                                <br/>
+                                Company: {{ element.company }}
+                                <br/>
+                                Production: {{ element.production }}
+                                <br/>
+                                City: {{ element.city }}
+                                <br/>
+                                State: {{ element.state }}
+                                <br/>
+                                type: {{ element.type }}
+                                <br/>
+                                Price: {{ element.price }}
                             </v-card>
                         </transition-group>
                     </draggable>
@@ -20,24 +32,45 @@
             <v-col class="col-6">
                 <h3>Ofertas</h3>
                 <p>Exibindo resultados para <b>{{userLocation}}</b></p>
-                <v-card>
-                    <h3>Offers 2</h3>
+                <v-card class="card-cart">
                     <draggable class="list-group" :list="list2" group="people" @change="log">
                         <transition-group>
                             <v-card class="list-group-item ma-4 pa-4" v-for="(element, index) in list2"
-                                :key="element.name">
-                                {{ element.name }} {{ index }}
+                                :key="element.company">
+                                Index:  {{ index }}
+                                <br/>
+                                Company: {{ element.company }}
+                                <br/>
+                                Production: {{ element.production }}
+                                <br/>
+                                City: {{ element.city }}
+                                <br/>
+                                State: {{ element.state }}
+                                <br/>
+                                type: {{ element.type }}
+                                <br/>
+                                Price: {{ element.price }}
                             </v-card>
                         </transition-group>
                     </draggable>
                 </v-card>
             </v-col>
-            <rawDisplayer class="col-6" :value="list1" title="List 1" />
-            <rawDisplayer class="col-6" :value="list2" title="List 2" />
         </v-row>
 
     </v-container>
 </template>
+
+<style lang="scss" scoped>
+    .card-cart {
+        background-color: #06121E;
+        border-radius: 20px;
+        border: #1DCFDE 3px solid;
+        padding: 10px;
+        margin: 10px;
+        min-height: 70vh;
+    }
+</style>
+
 <script>
 import draggable from "vuedraggable";
 import axios from "axios";
@@ -53,15 +86,44 @@ export default {
         return {
             userLocation: null,
             list1: [
-                { name: "John", id: 1 },
-                { name: "Joao", id: 2 },
-                { name: "Jean", id: 3 },
-                { name: "Gerard", id: 4 }
+                {
+                id: 1,
+                company: "Energy Green",
+                production: 152,
+                city: "Salvador",
+                state: "BA",
+                type: "Solar",
+                price: 14.20,
+                },
             ],
             list2: [
-                { name: "Juan", id: 5 },
-                { name: "Edgard", id: 6 },
-                { name: "Johnson", id: 7 }
+                {
+                id: 2,
+                company: "Hot Energy",
+                production: 98,
+                city: "Fortaleza",
+                state: "CE",
+                type: "Solar",
+                price: 32.20,
+                },
+                {
+                id: 3,
+                company: "Energy Plus",
+                production: 378,
+                city: "Santos",
+                state: "SP",
+                type: "Solar",
+                price: 54.20,
+                },
+                {
+                id: 4,
+                company: "Joa Energy",
+                production: 542,
+                city: "Joaçaba",
+                state: "PR",
+                type: "Solar",
+                price: 91.20,
+                },
             ]
         };
     },
@@ -86,14 +148,14 @@ export default {
                 });
         },
         add: function () {
-            this.list.push({ name: "Juan" });
+            this.list.push({ company: "Juan" });
         },
         replace: function () {
-            this.list = [{ name: "Edgard" }];
+            this.list = [{ company: "Edgard" }];
         },
         clone: function (el) {
             return {
-                name: el.name + " cloned"
+                company: el.company + " cloned"
             };
         },
         log: function (evt) {
