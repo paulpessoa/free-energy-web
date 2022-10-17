@@ -94,7 +94,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/scss/_variables.scss';
+@import '~@/scss/_variables.scss';
 
 .tab-title {
     color: $color-tertiary;
@@ -105,7 +105,7 @@
 }
 
 .card-cart {
-    background-color: $color-primary-dark;
+    background-color: #06121E;
     border-radius: 20px;
     border: #1DCFDE 3px solid;
     padding: 10px;
@@ -115,7 +115,7 @@
 
 .card-item {
     cursor: grab;
-    background-color: $color-primary;
+    background-color: #192A3D;
     border-radius: 20px;
     border: #1DCFDE 3px solid;
     border-left: 0px;
