@@ -9,7 +9,7 @@
                         <transition-group class="d-flex flex-row flex-wrap">
                             <div class="col-sm-12 col-md-12 col-lg-6" v-for="(element, index) in list1"
                                 :key="element.company">
-                                <v-card class="card-item ma-2 pa-4">
+                                <v-card class="item ma-2 pa-4">
                                     <v-card-title class="title my-0 py-0" style="color: #ECA426">
 
                                         <h2 class="my-2 pa-0">{{ element.production }}</h2>
@@ -54,7 +54,7 @@
                         <transition-group class="d-flex flex-row flex-wrap">
                             <div class="col-sm-12 col-md-12 col-lg-6" v-for="(element, index) in list2"
                                 :key="element.company">
-                                <v-card class="card-item ma-2 pa-4">
+                                <v-card class="item ma-2 pa-4">
                                     <v-card-title class="title my-0 py-0" style="color: #ECA426">
                                         <h2 class="my-2 pa-0">{{ element.production }}</h2>
                                         <span class="mx-2">KWh</span>
@@ -105,53 +105,54 @@
 }
 
 .card-cart {
-    background-color: #06121E;
+    background: #06121E!important;
     border-radius: 20px;
     border: #1DCFDE 3px solid;
     padding: 10px;
     margin: 10px;
     min-height: 70vh;
-}
-
-.card-item {
-    cursor: grab;
-    background-color: #192A3D;
-    border-radius: 20px;
-    border: #1DCFDE 3px solid;
-    border-left: 0px;
-    border-right: 0px;
-    padding: 10px;
-    margin: 10px;
-
-    .title {
-        h2 {
-            color: $color-secondary;
-            font-size: 40px;
-            font-weight: 400;
+    .item {
+        cursor: grab;
+        background: #192A3D!important;
+        border-radius: 20px;
+        border: #1DCFDE 3px solid;
+        border-left: 0px;
+        border-right: 0px;
+        padding: 10px;
+        margin: 10px;
+    
+        .title {
+            h2 {
+                color: $color-secondary;
+                font-size: 40px;
+                font-weight: 400;
+            }
+            
+            span {
+                color: $color-secondary;
+                font-size: 18px;
+            }
         }
-        
-        span {
-            color: $color-secondary;
-            font-size: 18px;
-        }
-    }
-
-    p,
-    div,
-    h3,
-    .v-icon {
-        color: #EDF3F4;
-    }
-
-    .button-item {
-        text-transform: none;
-        color: $color-tertiary;
-
+    
+        p,
+        div,
+        h3,
         .v-icon {
+            color: #EDF3F4;
+        }
+    
+        .button-item {
+            text-transform: none;
             color: $color-tertiary;
+    
+            .v-icon {
+                color: $color-tertiary;
+            }
         }
     }
 }
+
+
 
 .market-actions {
     justify-content: center;
