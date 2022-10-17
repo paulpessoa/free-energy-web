@@ -219,8 +219,8 @@ export default {
     data() {
         return {
             checkButton: true,
-            sumCart: 0,
-            sumPrice: 0,
+            sumCart: 685,
+            sumPrice: 985.58,
             dialog: false,
             userLocation: null,
             list1: [
@@ -231,7 +231,7 @@ export default {
                     city: "Salvador",
                     state: "BA",
                     type: "Solar",
-                    price: 14000000.00,
+                    price: 14.01,
                 },
                 {
                     id: 4,

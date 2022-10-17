@@ -1,5 +1,10 @@
 # Hackathon - I Hack 2 Green
 
+
+<a href="https://free-energy-web.vercel.app/" target="_blank"><img src="./src/assets/free-energy.gif" alt="Free Energy Preview"/></a>
+
+<a href="https://github.com/gusttaleal/free_energy_marketplace_mobile" target="_blank"><h2>Repositório Mobile</h2></a>
+
 - [ ] Landingpage
 
 - [ ] Factory List (factories can see buyer and buyer can see factories) 
