@@ -221,7 +221,7 @@ export default {
             checkButton: true,
             sumCart: 0,
             sumPrice: 0,
-            dialog: true,
+            dialog: false,
             userLocation: null,
             list1: [
                 {
