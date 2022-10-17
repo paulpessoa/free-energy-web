@@ -1,6 +1,7 @@
 <template>
     <v-container>
         <v-row>
+            <!--------------------- RIGHT BOX ----------------------->
             <v-col class="col-lg-6 col-md-6 col-sm-12">
                 <h3 class="tab-title">Carrinho</h3>
                 <p class="tab-subtitle">Total_ 152kWh | R$ 21,59</p>
@@ -41,9 +42,10 @@
                     </draggable>
                 </v-card>
             </v-col>
-
-
-
+            
+            
+            
+            <!--------------------- RIGHT BOX ----------------------->
             <v-col class="col-lg-6 col-md-6 col-sm-12">
                 <h3 class="tab-title">Ofertas</h3>
                 <p class="tab-subtitle">
@@ -76,8 +78,6 @@
                                         </v-btn>
                                         <span v-show="false">{{index}}</span>
                                     </v-card-text>
-
-
                                 </v-card>
                             </div>
                         </transition-group>
@@ -85,11 +85,43 @@
                 </v-card>
             </v-col>
         </v-row>
+
+        <!--------------------- DIALOG ----------------------->
         <v-row class="market-actions">
-            <v-btn class="button-checkout">
-                Finalizar pedido
-            </v-btn>
-        </v-row>
+            <v-dialog  v-model="dialog" max-width="400">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn class="button-checkout" v-bind="attrs" v-on="on"> Continuar </v-btn>
+                </template>
+
+
+
+                <v-card class="dialog-content" v-if="checkButton">
+                    <h2 class="my-6">
+                        Resumo da Compra
+                    </h2>
+                    <v-card-title class="ma-0 px-0">
+                        <h2 style="color: #ECA426" class="pa-0 ma-0">{{sumCart}}</h2>
+                        <span style="color: #ECA426" class="pa-0 ma-0">KWh</span>
+                        <v-spacer></v-spacer>
+                        <p class="pa-0 ma-0"><b>R$</b> {{ sumPrice }} / KWh </p>
+                    </v-card-title>
+
+                    <v-card-actions class="my-6">
+                        <v-btn text color="#1DCFDE" dark @click="dialog = false"> Voltar </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn class="button-checkout" @click="checkButton = false"> Finalizar </v-btn>
+                    </v-card-actions>
+                </v-card>
+                
+                
+                <v-card class="dialog-content" v-else>
+                    <v-icon color="#34F5C5" large>mdi-check-all</v-icon>
+                    <h2> Compra realizada! </h2>
+                    <p>Você já pode ursufruir da sua energia.</p>
+                    <v-btn class="button-checkout" @click="checkOut()"> Concluir </v-btn>
+                </v-card>
+        </v-dialog>
+    </v-row>
     </v-container>
 </template>
 
@@ -104,47 +136,59 @@
     color: #EDF3F4;
 }
 
+.dialog-content{
+    text-align: center;
+    background: #06121E !important;
+    border: #1DCFDE 3px solid;
+    border-radius: 20px;
+    padding: 30px;
+    .v-card-text{
+        padding: 20px;
+        
+    }
+}
 .card-cart {
-    background: #06121E!important;
+    background: #06121E !important;
     border-radius: 20px;
     border: #1DCFDE 3px solid;
     padding: 10px;
     margin: 10px;
     min-height: 70vh;
+
     .item {
         cursor: grab;
-        background: #192A3D!important;
+        background: #192A3D !important;
         border-radius: 20px;
         border: #1DCFDE 3px solid;
         border-left: 0px;
         border-right: 0px;
         padding: 10px;
         margin: 10px;
-    
+
         .title {
             h2 {
                 color: $color-secondary;
                 font-size: 40px;
                 font-weight: 400;
             }
-            
+
             span {
                 color: $color-secondary;
                 font-size: 18px;
             }
         }
-    
+
         p,
         div,
         h3,
         .v-icon {
             color: #EDF3F4;
         }
-    
+
         .button-item {
             text-transform: none;
             color: $color-tertiary;
-    
+
             .v-icon {
                 color: $color-tertiary;
             }
@@ -153,12 +197,11 @@
 }
 
 
-
 .market-actions {
     justify-content: center;
-    .button-checkout {
-        @include button-primary
-    }
+}
+.button-checkout {
+    @include button-primary
 }
 </style>
 
@@ -175,6 +218,10 @@ export default {
     },
     data() {
         return {
+            checkButton: true,
+            sumCart: 0,
+            sumPrice: 0,
+            dialog: true,
             userLocation: null,
             list1: [
                 {
@@ -219,6 +266,9 @@ export default {
         };
     },
     methods: {
+        checkOut() {
+            this.$router.push('/');
+        },
         addCart() {
             alert("Arraste o item para o carrinho");
         },
