@@ -1,10 +1,11 @@
 <template>
     <v-container>
         <v-row>
+            
             <!--------------------- RIGHT BOX ----------------------->
             <v-col class="col-lg-6 col-md-6 col-sm-12">
                 <h3 class="tab-title">Carrinho</h3>
-                <p class="tab-subtitle">Total_ 152kWh | R$ 21,59</p>
+                <p class="tab-subtitle">Total: {{sumProduction}}kWh | R$ {{sumPrice.toFixed(2)}}</p>
                 <v-card class="card-cart">
                     <draggable :list="list1" group="people" @change="log">
                         <transition-group class="d-flex flex-row flex-wrap">
@@ -42,9 +43,7 @@
                     </draggable>
                 </v-card>
             </v-col>
-            
-            
-            
+        
             <!--------------------- RIGHT BOX ----------------------->
             <v-col class="col-lg-6 col-md-6 col-sm-12">
                 <h3 class="tab-title">Ofertas</h3>
@@ -92,18 +91,15 @@
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn class="button-checkout" v-bind="attrs" v-on="on"> Continuar </v-btn>
                 </template>
-
-
-
                 <v-card class="dialog-content" v-if="checkButton">
                     <h2 class="my-6">
                         Resumo da Compra
                     </h2>
                     <v-card-title class="ma-0 px-0">
-                        <h2 style="color: #ECA426" class="pa-0 ma-0">{{sumCart}}</h2>
+                        <h2 style="color: #ECA426" class="pa-0 ma-0">{{sumProduction}}</h2>
                         <span style="color: #ECA426" class="pa-0 ma-0">KWh</span>
                         <v-spacer></v-spacer>
-                        <p class="pa-0 ma-0"><b>R$</b> {{ sumPrice }} / KWh </p>
+                        <p class="pa-0 ma-0"><b>R$</b> {{ sumPrice.toFixed(2) }} / KWh </p>
                     </v-card-title>
 
                     <v-card-actions class="my-6">
@@ -121,7 +117,7 @@
                     <v-btn class="button-checkout" @click="checkOut()"> Concluir </v-btn>
                 </v-card>
         </v-dialog>
-    </v-row>
+        </v-row>
     </v-container>
 </template>
 
@@ -216,25 +212,30 @@ export default {
     components: {
         draggable
     },
+    computed: {
+  sumProduction: function(){
+    return this.list1.reduce(function(total, item){
+      return total + item.production; 
+    },0);
+  },
+  sumPrice: function(){
+    return this.list1.reduce(function(total, item){
+      return total + item.price; 
+            },0);
+        }
+    },
     data() {
         return {
             checkButton: true,
             sumCart: 685,
-            sumPrice: 985.58,
             dialog: false,
             userLocation: null,
+            list2: [
+
+            ],
             list1: [
                 {
-                    id: 1,
-                    company: "Energy Green",
-                    production: 152,
-                    city: "Salvador",
-                    state: "BA",
-                    type: "Solar",
-                    price: 14.01,
-                },
-                {
-                    id: 4,
+                    id: 9999999,
                     company: "Joa Energy",
                     production: 542,
                     city: "Joaçaba",
@@ -243,29 +244,16 @@ export default {
                     price: 91.20,
                 },
             ],
-            list2: [
-                {
-                    id: 2,
-                    company: "Hot Energy",
-                    production: 98,
-                    city: "Fortaleza",
-                    state: "CE",
-                    type: "Solar",
-                    price: 32.20,
-                },
-                {
-                    id: 3,
-                    company: "Energy Plus",
-                    production: 378,
-                    city: "Santos",
-                    state: "SP",
-                    type: "Solar",
-                    price: 54.20,
-                }
-            ]
         };
     },
     methods: {
+        listProducts(){
+            axios.get('/products')
+            .then(response => {
+                this.list2 = response.data
+                console.log(response.data[0].city)
+            })
+        },
         checkOut() {
             this.$router.push('/');
         },
@@ -295,22 +283,19 @@ export default {
                 });
         },
         add: function () {
-            this.list.push({ company: "Juan" });
-        },
-        replace: function () {
-            this.list = [{ company: "Edgard" }];
-        },
-        clone: function (el) {
-            return {
-                company: el.company + " cloned"
-            };
+            this.$store.commit("sumProduction", this.sumProduction);
+            this.$store.commit("sumPrice", this.sumPrice);
+
         },
         log: function (evt) {
             window.console.log(evt);
         }
-    },
+        },
     mounted() {
         this.geolocation();
+    },
+    created() {
+        this.listProducts()
     }
-};
+}
 </script>
